@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{{doctor.name}}
+{% endblock %}
+{% block content %}
+<div>
+    <div>
+        <p><a href="{% url 'VCareUApp:allDept' %}">Home</a> | <a href="{{doctor.department.get_url}}"></a> {{doctor.name}}</p>
+    </div>
+    <div><br>
+        <div>
+            <div>
+                <img src="{{doctor.img.url}}" alt="{{doctor.name}}" style="height:200px;width:200px;">
+            </div>
+        </div>
+        <div>
+            <div>
+                <h1>Dr.{{doctor.name}}</h1>
+                <h3>{{doctor.age}}yrs</h3>
+                <h3>{{doctor.gender}}</h3>
+                <h3>{{doctor.email}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+{% if department %}
+{{department.desc | truncatewords:155}}
+{% else %}
+Welcome to V Care U
+{% endif %}
+{% endblock %}
+{% block title %}
+{% if department %}
+{{department.name}}
+{% else %}
+See Our Doctors
+{% endif %}
+{% endblock %}
+{% block content %}
+{% if department %}
+<div>
+
+    <div>
+        <p><a href="{% url 'VCareUApp:allDept' %}">Our Departments</a> </p>
+    </div>
+</div>
+{% endif %}
+<div>
+    click here To fill the Appointment<a href="{% url 'FormApp:Form' %}">Form</a>
+    </div>
+
+<div>
+    {% if department %}
+    <img src="{{department.img.url}}" alt="{{department.name}}" style="width:1250px;">
+</div>
+<div>
+    <h1 class="text-center">{{department.name}}</h1>
+    <p class="text-center">{{department.desc}}</p>
+</div>
+    {% else %}
+<div>
+    <center> <img src="{% static 'img/vcareubanner1.png' %}" alt="" style="width:1250px;"></center>
+</div><br>
+<div>
+    <h1>V Care U Departments</h1>
+    {% endif %}
+</div>
+<div class="container">
+    <div>
+        {% for doctor in doctors.object_list %}
+        <div class="col-9 col-sm-12 col-md-4 col-lg-4">
+            <div>
+                <a href="{{doctor.get_url}}"><img src="{{doctor.img.url}}" alt="" style="height:200px;width:200px;"></a>
+                <div>
+                    <h3>{{doctor.name}}</h3>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div>
+             {% for pg in doctors.paginator.page_range %}
+        <a href="?page={{pg}}" class="btn btn-light btn-sm {% if doctors.number == pg %} activate {% endif %}">{{pg}}</a>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

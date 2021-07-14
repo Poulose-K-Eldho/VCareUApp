@@ -1,0 +1,9 @@
+<nav>
+    <ul>
+        <li><a href="{% url 'VCareUApp:allDept' %}">Home</a> </li>
+        <b>Our Departments</b>
+        {% for dept in links %}
+        <li><a href="{{dept.get_url}}">{{dept.name}}</a> </li>
+        {% endfor %}
+    </ul>
+</nav>
